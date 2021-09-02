@@ -67,5 +67,24 @@ class RestaurantTest {
                 ()->restaurant.removeFromMenu("French fries"));
     }
 
+    //TDD approach for calculating the sum of food items added
+    @Test
+    public void when_sum_of_foodItems_should_be_returned(){
+        LocalTime openingTime = LocalTime.parse("10:30:00");
+        LocalTime closingTime = LocalTime.parse("22:00:00");
+        restaurant = new Restaurant("Amelie's cafe","Chennai",openingTime,closingTime);
+        restaurant.addToMenu("Sweet corn soup",110);
+        restaurant.addToMenu("French Fries", 250);
+
+        Item item1= new Item("Sweet corn soup",110);
+        Item item2= new Item("French Fries",250);
+        List<Item> itemList= new ArrayList<>();
+        itemList.add(0,item1);
+        itemList.add(1,item2);
+
+        int totalValue= restaurant.calculateSum(itemList);
+        assertNotEquals(0,360);
+        assertEquals(260,totalValue);
+    }
 
 }
