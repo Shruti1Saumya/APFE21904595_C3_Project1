@@ -20,36 +20,36 @@ public class Restaurant {
     }
 
     public boolean isRestaurantOpen() {
-        if (getCurrentTime().isAfter(openingTime)&& getCurrentTime().isBefore(closingTime))
-        {
-            IsOpen=true;
-        }
-        else {
+        if (getCurrentTime().isAfter(openingTime) && getCurrentTime().isBefore(closingTime)) {
+            IsOpen = true;
+        } else {
             IsOpen = false;
         }
         return IsOpen;
     }
 
-    public LocalTime getCurrentTime(){ return  LocalTime.now(); }
+    public LocalTime getCurrentTime() {
+        return LocalTime.now();
+    }
 
     public List<Item> getMenu() {
-         return menu;
+        return menu;
 
     }
 
-    private Item findItemByName(String itemName){
-        for(Item item: menu) {
-            if(item.getName().equals(itemName))
+    private Item findItemByName(String itemName) {
+        for (Item item : menu) {
+            if (item.getName().equals(itemName))
                 return item;
         }
         return null;
     }
 
     public void addToMenu(String name, int price) {
-        Item newItem = new Item(name,price);
+        Item newItem = new Item(name, price);
         menu.add(newItem);
     }
-    
+
     public void removeFromMenu(String itemName) throws itemNotFoundException {
 
         Item itemToBeRemoved = findItemByName(itemName);
@@ -58,12 +58,13 @@ public class Restaurant {
 
         menu.remove(itemToBeRemoved);
     }
-    public void displayDetails(){
-        System.out.println("Restaurant:"+ name + "\n"
-                +"Location:"+ location + "\n"
-                +"Opening time:"+ openingTime +"\n"
-                +"Closing time:"+ closingTime +"\n"
-                +"Menu:"+"\n"+getMenu());
+
+    public void displayDetails() {
+        System.out.println("Restaurant:" + name + "\n"
+                + "Location:" + location + "\n"
+                + "Opening time:" + openingTime + "\n"
+                + "Closing time:" + closingTime + "\n"
+                + "Menu:" + "\n" + getMenu());
 
     }
 
@@ -71,7 +72,12 @@ public class Restaurant {
         return name;
     }
 
-    public int getPrice(){
-        return price;
+    public int calculateSum(List<Item> itemList) {
+        int sumOfItems = 0;
+        for (int i = 0; i < itemList.size(); i++) {
+            int price = itemList.get(i).getPrice();
+            sumOfItems = sumOfItems + price;
+        }
+        return sumOfItems;
     }
 }
